@@ -1,12 +1,20 @@
 .Todo {
   padding: 10px 20px;
   box-shadow: 0 0 1px rgb(0, 0, 0, 0.45);
-  width: 800px;
+  width: 600px;
   border-radius: 8px;
   opacity: 1;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 20px;
+
+  &:hover,
+  &:active {
+    box-shadow: 0 0 4px rgb(0, 0, 0, 0.45);
+  }
 
   &.completed {
-    background-color: lightgreen;
     opacity: 0.5;
   }
 
@@ -15,7 +23,8 @@
     font-weight: bold;
   }
 
-  .isDone {
-    font-size: 12px;
+  .checkboxInput {
+    scale: 1.2;
+    cursor: pointer;
   }
 }

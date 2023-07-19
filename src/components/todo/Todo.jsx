@@ -1,18 +1,34 @@
 // import React
-import { useContext } from "react";
+import { useContext, useState } from "react";
 
 // import state
 import { AppContext } from "@/state";
 
 import styles from "./Todo.module.scss";
 
-const Todo = ({ content }) => {
-  const { state, dispatch } = useContext(AppContext);
+const Todo = ({ data }) => {
+  const { dispatch } = useContext(AppContext);
+
+  const [isChecked, setIsChecked] = useState(data.completed);
+
+  const onHandleChange = () => {
+    dispatch({
+      type: "CHANGE_TODO_STATE",
+      payload: data.id,
+    });
+
+    setIsChecked(!isChecked);
+  };
 
   return (
-    <div className={`${content.completed && styles.completed} ${styles.Todo}`}>
-      <p className={styles.task}>{content.task}</p>
-      <p className={styles.isDone}>{content.completed ? "Done!" : "Todo"}</p>
+    <div className={`${isChecked && styles.completed} ${styles.Todo}`}>
+      <input
+        className={styles.checkboxInput}
+        type="checkbox"
+        checked={isChecked}
+        onChange={onHandleChange}
+      />
+      <p className={styles.task}>{data.task}</p>
     </div>
   );
 };

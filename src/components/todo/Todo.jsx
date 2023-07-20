@@ -6,6 +6,8 @@ import { AppContext } from "@/state";
 
 import styles from "./Todo.module.scss";
 
+import { FaCircleXmark } from "react-icons/fa6";
+
 const Todo = ({ data }) => {
   const { dispatch } = useContext(AppContext);
 
@@ -20,6 +22,13 @@ const Todo = ({ data }) => {
     setIsChecked(!isChecked);
   };
 
+  const onHandleDelete = (id) => {
+    dispatch({
+      type: "DELETE_TODO",
+      payload: data.id,
+    });
+  };
+
   return (
     <div className={`${isChecked && styles.completed} ${styles.Todo}`}>
       <input
@@ -29,6 +38,7 @@ const Todo = ({ data }) => {
         onChange={onHandleChange}
       />
       <p className={styles.task}>{data.task}</p>
+      <FaCircleXmark onClick={() => onHandleDelete(data.id)} />
     </div>
   );
 };

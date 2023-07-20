@@ -13,6 +13,10 @@ export const mainReducer = (state, action) => {
       return {
         todos: [...state.todos, action.payload],
       };
+    case "DELETE_TODO":
+      return {
+        todos: state.todos.filter((todo) => todo.id !== action.payload),
+      };
     default: {
       throw Error("Unknown action: " + action.type);
     }

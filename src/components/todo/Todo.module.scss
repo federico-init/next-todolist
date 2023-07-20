@@ -1,12 +1,12 @@
 .Todo {
   padding: 10px 20px;
   box-shadow: 0 0 1px rgb(0, 0, 0, 0.45);
-  width: 600px;
+  width: 500px;
   border-radius: 8px;
   opacity: 1;
   display: flex;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: space-between;
   gap: 20px;
 
   &:hover,
@@ -19,12 +19,16 @@
   }
 
   .task {
-    font-size: 14px;
+    font-size: 15px;
     font-weight: bold;
   }
 
   .checkboxInput {
     scale: 1.2;
+    cursor: pointer;
+  }
+
+  svg {
     cursor: pointer;
   }
 }

@@ -21,6 +21,7 @@ const TodoList = () => {
   const [todoInput, setTodoInput] = useState("");
 
   const onHandleModal = () => {
+    setTodoInput("");
     setIsModalOpen((prev) => !prev);
   };
 
@@ -29,12 +30,12 @@ const TodoList = () => {
   };
 
   const onHandleSubmit = (e) => {
-    e.preventDefault;
+    e.preventDefault();
 
     dispatch({
       type: "ADD_TODO",
       payload: {
-        id: Math.floor(Math.random() * 999999),
+        id: Math.floor(Math.random() * 999),
         task: todoInput,
         completed: false,
       },
@@ -42,49 +43,47 @@ const TodoList = () => {
 
     // pulisco il text input dopo il submit
     setTodoInput("");
+    setIsModalOpen(false);
   };
 
   return (
-    <>
-      {isModalOpen && (
-        <div className={styles.TodoList__modalBackground}>
-          <div className={styles.TodoList__modal}>
-            <form
-              className={styles.TodoList__modal__form}
-              onSubmit={onHandleSubmit}
-            >
-              <input
-                type="text"
-                value={todoInput}
-                placeholder="New task"
-                onChange={onHandleInput}
-              />
-              <input type="button" value="Add" onClick={onHandleSubmit} />
-              <input type="button" value="Cancel" />
-            </form>
-          </div>
-        </div>
-      )}
-
-      <div className={styles.TodoList}>
-        <div className={styles.TodoList__heading}>
-          <h4>Your tasks</h4>
-          <div className={styles.TodoList__addBtn} onClick={onHandleModal}>
-            <FaPlus />
-          </div>
-        </div>
-
-        <div className={styles.list}>
-          {state?.todos ? (
-            state.todos.map((todo) => {
-              <Todo key={todo.id} data={todo} />;
-            })
-          ) : (
-            <h3>No tasks here, well done!</h3>
-          )}
+    <div className={styles.TodoList}>
+      <div className={styles.TodoList__heading}>
+        <h4>Your tasks</h4>
+        <div className={styles.TodoList__addBtn} onClick={onHandleModal}>
+          <FaPlus />
         </div>
       </div>
-    </>
+
+      <div className={styles.list}>
+        {state?.todos ? (
+          state.todos.map((todo) => <Todo key={todo.id} data={todo} />)
+        ) : (
+          <h3>No tasks here, well done!</h3>
+        )}
+      </div>
+
+      {/* Modal */}
+      {isModalOpen && (
+        <div className={styles.TodoList__modal}>
+          <form
+            className={styles.TodoList__modal__form}
+            onSubmit={onHandleSubmit}
+          >
+            <input
+              type="text"
+              value={todoInput}
+              placeholder="Add a new task"
+              onChange={onHandleInput}
+            />
+            <div className={styles.TodoList__modal__buttons}>
+              <input type="button" value="Save" onClick={onHandleSubmit} />
+              <input type="button" value="Cancel" onClick={onHandleModal} />
+            </div>
+          </form>
+        </div>
+      )}
+    </div>
   );
 };
 

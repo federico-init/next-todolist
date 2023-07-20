@@ -41,15 +41,13 @@ const TodoList = () => {
       },
     });
 
-    // pulisco il text input dopo il submit
-    setTodoInput("");
     setIsModalOpen(false);
   };
 
   return (
     <div className={styles.TodoList}>
       <div className={styles.TodoList__heading}>
-        <h4>Your tasks</h4>
+        <h4>Add new task</h4>
         <div className={styles.TodoList__addBtn} onClick={onHandleModal}>
           <FaPlus />
         </div>

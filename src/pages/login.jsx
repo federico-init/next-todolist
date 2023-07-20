@@ -5,6 +5,7 @@ import { AppContext } from "@/state";
 // import Next
 import Head from "next/head";
 
+// import Firebase authentication
 import { signInWithPopup } from "firebase/auth";
 import { auth, provider } from "@/plugins/firebase";
 
@@ -12,17 +13,14 @@ import styles from "@/styles/Login.module.scss";
 
 export default function Login() {
   const router = useRouter();
-
   const { dispatch } = useContext(AppContext);
+  const [usernameInput, setUsernameInput] = useState("");
 
-  const [input, setInput] = useState("");
-
-  const onHandleInput = (e) => setInput(e.target.value);
-
+  const onHandleInput = (e) => setUsernameInput(e.target.value);
   const onHandleSubmit = (e) => {
     e.preventDefault();
 
-    dispatch({ type: "SET_USERNAME", payload: input });
+    dispatch({ type: "SET_USERNAME", payload: usernameInput });
 
     router.push("/");
   };
@@ -41,11 +39,12 @@ export default function Login() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/todo.svg" />
       </Head>
+
       <form className={styles.Login} onSubmit={onHandleSubmit}>
         <h1>Log in</h1>
         <input
           type="text"
-          value={input}
+          value={usernameInput}
           onChange={onHandleInput}
           placeholder="Username"
         />

@@ -25,7 +25,7 @@ const Todo = ({ data }) => {
   const onHandleDelete = (id) => {
     dispatch({
       type: "DELETE_TODO",
-      payload: data.id,
+      payload: id,
     });
   };
 

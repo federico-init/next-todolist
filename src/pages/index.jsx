@@ -1,23 +1,22 @@
 // import React
-import { useReducer } from "react";
+import { useContext } from "react";
 
 // import Next
 import Head from "next/head";
 import Link from "next/link";
 
 // import state
-import { AppContext, initialState } from "@/state";
-import { mainReducer } from "@/state/reducers";
+import { AppContext } from "@/state";
 
 // import components
-import AppLayout from "@/layouts/AppLayout";
+import Navbar from "@/components/navbar";
 import TodoList from "@/components/todoList";
 
 // import style
 import styles from "@/styles/Home.module.scss";
 
 export default function Home() {
-  const [state, dispatch] = useReducer(mainReducer, initialState);
+  const { state, dispatch } = useContext(AppContext);
 
   return (
     <>
@@ -29,13 +28,10 @@ export default function Home() {
       </Head>
 
       {state.username ? (
-        <AppContext.Provider value={{ state, dispatch }}>
-          <AppLayout>
-            <main className={styles.Home}>
-              <TodoList />
-            </main>
-          </AppLayout>
-        </AppContext.Provider>
+        <main className={styles.Home}>
+          <Navbar />
+          <TodoList />
+        </main>
       ) : (
         <div className={styles.login}>
           <h1>Please log in</h1>

@@ -1,12 +1,14 @@
+// import React
 import { useContext } from "react";
 
+// import state
 import { AppContext } from "@/state";
 
 // import style
 import styles from "./Navbar.module.scss";
 
 const Navbar = () => {
-  const { state } = useContext(AppContext);
+  const { state, dispatch } = useContext(AppContext);
 
   const onHandleLogout = () => dispatch({ type: "SET_LOGOUT" });
 
@@ -19,8 +21,12 @@ const Navbar = () => {
             ? `You've got ${state.todos.length} tasks on your list`
             : "No tasks here, well done!"}{" "}
         </p>
-        {state.username && <p onClick={onHandleLogout}>Logout</p>}
       </div>
+      {state.username && (
+        <p className={styles.logout} onClick={onHandleLogout}>
+          Logout
+        </p>
+      )}
     </div>
   );
 };

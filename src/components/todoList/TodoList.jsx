@@ -56,11 +56,9 @@ const TodoList = () => {
       </div>
 
       <div className={styles.list}>
-        {state?.todos ? (
-          state.todos.map((todo) => <Todo key={todo.id} data={todo} />)
-        ) : (
-          <h3>No tasks here, well done!</h3>
-        )}
+        {state?.todos?.map((todo) => (
+          <Todo key={todo.id} data={todo} />
+        ))}
       </div>
 
       {/* Modal */}

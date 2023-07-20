@@ -3,6 +3,7 @@ import { useReducer } from "react";
 
 // import Next
 import Head from "next/head";
+import Link from "next/link";
 
 // import state
 import { AppContext, initialState } from "@/state";
@@ -27,13 +28,20 @@ export default function Home() {
         <link rel="icon" href="/todo.svg" />
       </Head>
 
-      <AppContext.Provider value={{ state, dispatch }}>
-        <AppLayout>
-          <main className={styles.Home}>
-            <TodoList />
-          </main>
-        </AppLayout>
-      </AppContext.Provider>
+      {state.username ? (
+        <AppContext.Provider value={{ state, dispatch }}>
+          <AppLayout>
+            <main className={styles.Home}>
+              <TodoList />
+            </main>
+          </AppLayout>
+        </AppContext.Provider>
+      ) : (
+        <div className={styles.login}>
+          <h1>Please log in</h1>
+          <Link href="/login">Go to Login</Link>
+        </div>
+      )}
     </>
   );
 }
